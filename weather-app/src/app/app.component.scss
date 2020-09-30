@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.weather-app {
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: white;
+    width: 100%;
+    
+    &-search{
+        margin: auto;
+        margin-top: 10px;
+        height: 31px;
+        width: 38%;
+        display: flex;
+        padding-top: 5px;
+        padding-left: 5px;
+        padding-bottom: 5px;
+        padding-right: 5px;
+        background-color: rgb(111, 233, 217);
+
+        &-input {
+            background-color: rgb(111, 233, 217);
+            padding: 0px;
+            height: 30px;
+            width: 70%;
+            cursor: text;
+            
+            
+            &-box {
+                padding-left: 6px;
+                width: 96%;
+                height: 26px;
+            /*  border: none; */ 
+            }
+        }
+        &-button{
+            width: 30%;
+            height: 30px;
+            cursor: pointer;
+        }
+    }
+}
+.body {
+    
+    margin: auto;
+    margin-top: 16%;
+    width: 40%;
+    background-color: lavender;
+    padding: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    &-details{
+        padding: 40px;
+        padding-top: 30px;
+        margin: auto;
+        width: 50%;
+        color: black;
+        background-color: rgb(111, 233, 217);
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+    }
+    &-map{
+        margin-top: 20px;
+    }
+/*     &-error{
+        padding: 40px;
+        padding-top: 30px;
+        margin: auto;
+        width: 50%;
+        color: black;
+        background-color: rgb(111, 233, 217);
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+    } */
+}
+
+.city{
+    font-weight: bold;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+.icon{
+    height: 50px;
+    width: 50px;
+    margin: auto;
+}
+.temp{
+    margin-bottom: 5px;
+}
+.state{
+    margin-bottom: 5px;
+}
+.date{
+    vertical-align: bottom;
+}
+.map{
+    width: 300px;
+    height: 170px;
+}
