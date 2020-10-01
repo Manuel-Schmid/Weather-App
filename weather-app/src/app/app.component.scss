@@ -15,62 +15,85 @@
     
     &-search{
         margin: auto;
-        margin-top: 10px;
+        margin-top: 0px;
         height: 31px;
         width: 38%;
         display: flex;
-        padding-top: 5px;
+        padding-top: 25px;
         padding-left: 5px;
-        padding-bottom: 5px;
+        padding-bottom: 25px;
         padding-right: 5px;
-        background-color: rgb(111, 233, 217);
+       /*  transform: skew(30deg); */
+        
 
         &-input {
-            background-color: rgb(111, 233, 217);
+/*          background-color: rgb(111, 233, 217); */
             padding: 0px;
             height: 30px;
             width: 70%;
             cursor: text;
             
-            
             &-box {
                 padding-left: 6px;
-                width: 96%;
-                height: 26px;
-            /*  border: none; */ 
+                background-color: rgb(111, 233, 217);
+                border: none;
+                font-family: 'Poppins', sans-serif;
+                width: 100%;
+                height: 30px;
             }
+            
         }
         &-button{
             width: 30%;
             height: 30px;
+            background-color: rgb(104, 218, 202);
+            border: none;
+            font-family: 'Poppins', sans-serif;
             cursor: pointer;
         }
     }
 }
-.body {
+button:focus{
+    outline: none;
+    border: 2px solid rgb(72, 143, 133);
+}
+input:focus{
+    outline: none;
+}
+
+.content {
     
     margin: auto;
     margin-top: 16%;
-    width: 40%;
-    background-color: lavender;
+    width: 55%;
+    background-color: white;
     padding: 20px;
     padding-top: 30px;
     padding-bottom: 30px;
+    -webkit-box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
+    -moz-box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
+    box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
 
     &-details{
         padding: 40px;
         padding-top: 30px;
+        padding-bottom: 1%;
         margin: auto;
         width: 50%;
         color: black;
         background-color: rgb(111, 233, 217);
         font-family: 'Poppins', sans-serif;
         text-align: center;
+        -webkit-box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.14);
+        -moz-box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.14);
+        box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.14)
     }
     &-map{
-        margin-top: 20px;
+        margin-top: 35px;
+        margin-bottom: 20px;
     }
-/*     &-error{
+    &-error{
+        margin-top: 20px;
         padding: 40px;
         padding-top: 30px;
         margin: auto;
@@ -79,7 +102,15 @@
         background-color: rgb(111, 233, 217);
         font-family: 'Poppins', sans-serif;
         text-align: center;
-    } */
+    }
+
+}
+iframe{
+    outline: none;
+    border: none;
+    -webkit-box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.14);
+    -moz-box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.14);
+    box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.14);
 }
 
 .city{
@@ -88,8 +119,8 @@
     margin-bottom: 10px;
 }
 .icon{
-    height: 50px;
-    width: 50px;
+    height: 70px;
+    width: 70px;
     margin: auto;
 }
 .temp{
@@ -101,7 +132,14 @@
 .date{
     vertical-align: bottom;
 }
+
 .map{
-    width: 300px;
+    width: 99%;
     height: 170px;
+    margin: auto;
+}
+
+.errormessage{
+    font-size: 22px;
+    margin-bottom: 10px;
 }

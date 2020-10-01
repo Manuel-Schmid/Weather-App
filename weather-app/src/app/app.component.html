@@ -1,26 +1,25 @@
-<body>
   <div class="wheather-app">
     <div class="header">
       <div class="header-search">
-        <div class="header-search-input"><input class="header-search-input-box" (keyup)="onInput($event)"></div> 
-        <button class="header-search-button" (click)="onSearch(location)">Search</button>
+        <div class="header-search-input"><input id="searchInput" class="header-search-input-box" (keyup)="onInput($event)"></div> 
+        <button id="searchButton" class="header-search-button" (click)="onSearch(location)">Search</button>
       </div>
     </div>
-    <div class="body">
-      <div *ngIf="weatherData" class="body-details">
+    <div class="content">
+      <div *ngIf="weatherData" class="content-details">
         <div class="city">{{ weatherData.name }}</div>
         <img [src]="getIcon()" class="icon" alt="Weather-Icon">
         <div class="temp">{{ weatherData.main.temp }}°C</div>
         <div class="state">{{ weatherData.weather[0].description }}</div>
         <div class="date">{{ getDate() }}</div>
+        <div *ngIf="weatherData" class="content-map">
+          <iframe [src]="this.sanitizedURL()" class="map"></iframe>
+        </div>
       </div>
-      <div *ngIf="weatherData" class="body-map">
-        <iframe [src]="this.sanitizedURL()" class="map"></iframe>
-      </div>
+
+      <div *ngIf="isError" class="content-error">
+        <div class="errormessage">{{ errormsg }}</div>
+    </div>
     </div>
   </div>
-</body>
 
-<!--       <div *ngIf="weatherData.name === null || weatherData.name === undefined" class="body-error">
-          <div class="errormsg">There is no city called "{{ location }}" in our Database.</div>
-      </div> -->

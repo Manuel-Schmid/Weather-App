@@ -12,7 +12,7 @@ export class GoogleMapsService {
   constructor(private http: HttpClient) {  }
 
   getMapUrl(lat: number, lon: number): string{
-    return `https://maps.google.com/maps?q=${lat},${lon}&hl=de&z=14&amp;output=embed`;
+    return `https://maps.google.com/maps?q=${lat},${lon}&z=15&output=embed`;
   }
 }
 

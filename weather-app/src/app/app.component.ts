@@ -18,6 +18,8 @@ export class AppComponent {
   weather: Observable<WeatherItem>;
   weatherData: WeatherItem;
   trustedUrl: SafeUrl;
+  errormsg = '';
+  isError: boolean;
 
   constructor(
     private weatherApiService: WeatherApiService,
@@ -27,11 +29,25 @@ export class AppComponent {
 
   onInput(event: any): any {
     this.location = event.target.value;
+    // search with enter
+    if (event.keyCode === 13){
+      this.onSearch(this.location);
+    }
   }
 
-  onSearch(location: string): void {
+  onSearch(location: string): any {
+    this.errormsg = '';
+    this.isError = false;
+    this.weatherData = null;
     this.weather = this.getWeather(location);
-    this.weather.subscribe(data => this.weatherData = data);
+    this.weather.subscribe(
+      data => this.weatherData = data,
+      error => {
+        this.isError = true;
+        this.errormsg = `There is no city called "${location}" in our database.`;
+
+      }
+      );
   }
 
   getWeather(location: string): Observable<WeatherItem>{
