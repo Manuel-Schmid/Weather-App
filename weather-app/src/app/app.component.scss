@@ -12,6 +12,13 @@
 .header {
     background-color: white;
     width: 100%;
+    padding: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 15%;
+    -webkit-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.12);
+    -moz-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.12);
+    box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.12);
     
     &-search{
         margin: auto;
@@ -19,40 +26,68 @@
         height: 31px;
         width: 38%;
         display: flex;
-        padding-top: 25px;
         padding-left: 5px;
-        padding-bottom: 25px;
+        padding-bottom: 50px;
         padding-right: 5px;
-       /*  transform: skew(30deg); */
         
-
         &-input {
-/*          background-color: rgb(111, 233, 217); */
+            margin-top: 25px;
+            margin-left: 20px;
             padding: 0px;
-            height: 30px;
+            height: 34px;
             width: 70%;
             cursor: text;
             
             &-box {
                 padding-left: 6px;
-                background-color: rgb(111, 233, 217);
+                background-color: rgb(29, 196, 182);
                 border: none;
                 font-family: 'Poppins', sans-serif;
                 width: 100%;
-                height: 30px;
+                height: 34px;
             }
             
         }
         &-button{
+            margin-top: 25px;
+            margin-right: 20px;
+            padding-right: 5px;
             width: 30%;
-            height: 30px;
-            background-color: rgb(104, 218, 202);
+            height: 34px;
+            background-color: rgb(29, 196, 182);
             border: none;
             font-family: 'Poppins', sans-serif;
             cursor: pointer;
+
         }
     }
 }
+.header::after{
+    content:"";
+    position: absolute;
+    margin-top: 5px;
+    margin-left: calc(100% - 400px);
+    height: 0px;
+    border: 200px solid;
+    border-bottom-color: transparent;
+    border-top-color:rgb(28, 184, 171);
+    border-left-color: transparent;
+    border-right-color: rgb(28, 184, 171);
+}
+/* .overheader::after{
+    content:"";
+    position: absolute;
+    margin-top: calc(100% - 400px);
+    margin-left: 0px;
+    width: 0px;
+    height: 0px;
+    border: 200px solid;
+    border-bottom-color: rgb(28, 184, 171);
+    border-top-color: transparent;
+    border-left-color: rgb(28, 184, 171);
+    border-right-color: transparent;
+} */
+
 button:focus{
     outline: none;
     border: 2px solid rgb(72, 143, 133);
@@ -60,26 +95,59 @@ button:focus{
 input:focus{
     outline: none;
 }
+.centeredxxxx{
+    position: fixed;
+    left: 37%;
+    top: 30%;
+}
 
 .content {
-    
+
     margin: auto;
-    margin-top: 16%;
-    width: 55%;
+    width: 25%;
+    position: absolute;
+    margin-left: 37.5%;
+    background-color: white;
+    padding: 20px;
+    -webkit-box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
+    -moz-box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
+    box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
+
+    &-details{
+        padding-top: 30px;
+        padding-bottom: 1%;
+        margin: auto;
+        width: 100%;
+        color: white;
+        background-color: rgb(28, 184, 171);
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        -webkit-box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.14);
+        -moz-box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.14);
+        box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.14)
+    }
+    &-map{
+        margin-top: 20px;
+        margin-bottom: 4%;
+    }
+}
+
+.content-error{
+    width: 34%;
     background-color: white;
     padding: 20px;
     padding-top: 30px;
     padding-bottom: 30px;
     -webkit-box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
     -moz-box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
-    box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
-
+    box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);  
+    
     &-details{
         padding: 40px;
         padding-top: 30px;
-        padding-bottom: 1%;
+        padding-bottom: 30px;
         margin: auto;
-        width: 50%;
+        width: 63%;
         color: black;
         background-color: rgb(111, 233, 217);
         font-family: 'Poppins', sans-serif;
@@ -88,23 +156,8 @@ input:focus{
         -moz-box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.14);
         box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.14)
     }
-    &-map{
-        margin-top: 35px;
-        margin-bottom: 20px;
-    }
-    &-error{
-        margin-top: 20px;
-        padding: 40px;
-        padding-top: 30px;
-        margin: auto;
-        width: 50%;
-        color: black;
-        background-color: rgb(111, 233, 217);
-        font-family: 'Poppins', sans-serif;
-        text-align: center;
-    }
-
 }
+
 iframe{
     outline: none;
     border: none;
@@ -122,24 +175,24 @@ iframe{
     height: 70px;
     width: 70px;
     margin: auto;
+    margin-bottom: 10px;
 }
 .temp{
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 .state{
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 .date{
     vertical-align: bottom;
 }
 
 .map{
-    width: 99%;
-    height: 170px;
+    width: 85%;
+    height: 20%;
     margin: auto;
 }
 
 .errormessage{
     font-size: 22px;
-    margin-bottom: 10px;
 }

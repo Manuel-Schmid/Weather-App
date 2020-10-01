@@ -1,25 +1,28 @@
   <div class="wheather-app">
-    <div class="header">
-      <div class="header-search">
-        <div class="header-search-input"><input id="searchInput" class="header-search-input-box" (keyup)="onInput($event)"></div> 
-        <button id="searchButton" class="header-search-button" (click)="onSearch(location)">Search</button>
+    <div class="overheader">
+      <div class="header">
+        <div class="header-search">
+          <div class="header-search-input"><input id="searchInput" class="header-search-input-box" (keyup)="onInput($event)"></div> 
+          <button id="searchButton" class="header-search-button" (click)="onSearch(location)">Search</button>
+        </div>
       </div>
-    </div>
-    <div class="content">
-      <div *ngIf="weatherData" class="content-details">
+  </div>
+    <div *ngIf="weatherData" class="content centered">
+      <div class="content-details">
         <div class="city">{{ weatherData.name }}</div>
-        <img [src]="getIcon()" class="icon" alt="Weather-Icon">
-        <div class="temp">{{ weatherData.main.temp }}°C</div>
+        <img [src]="getIcon()" class="icon" alt="weatherData.weather[0].description">
+        <div class="temp">{{ weatherData.main.temp }} °C</div>
         <div class="state">{{ weatherData.weather[0].description }}</div>
         <div class="date">{{ getDate() }}</div>
         <div *ngIf="weatherData" class="content-map">
           <iframe [src]="this.sanitizedURL()" class="map"></iframe>
         </div>
       </div>
-
-      <div *ngIf="isError" class="content-error">
+    </div>
+    <div *ngIf="isError" class="content-error centered">
+      <div class="content-error-details">
         <div class="errormessage">{{ errormsg }}</div>
-    </div>
-    </div>
+      </div>
+  </div>
   </div>
 

@@ -70,7 +70,10 @@ export class AppComponent {
     const offset = this.weatherData.timezone / 3600;
     const currentTime = utc + (3600000 * offset);
     const currentDate = new Date(currentTime);
-    const cd = currentDate.toLocaleString(); /* [], {hour: '2-digit', minute: '2-digit'} */
+    const dd = (currentDate.getDate() < 10 ? '0' : '') + currentDate.getDate();
+    const mm = ((currentDate.getMonth() + 1) < 10 ? '0' : '') + (currentDate.getMonth() + 1);
+    const cd = `${dd}.${mm}.${currentDate.getFullYear()}  ${currentDate.getHours()}:${currentDate.getMinutes()}`;
+
     return cd;
   }
 
