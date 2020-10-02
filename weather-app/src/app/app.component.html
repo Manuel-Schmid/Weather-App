@@ -2,11 +2,27 @@
     <div class="overheader">
       <div class="header">
         <div class="header-search">
-          <div class="header-search-input"><input id="searchInput" class="header-search-input-box" (keyup)="onInput($event)"></div> 
+          <div class="header-search-input">
+            <input 
+            id="searchInput" 
+            class="header-search-input-box" 
+            type="text"
+            (keyup)="onSearchKeyUp($event)"
+            (input)="onTypeahead($event.target.value)"
+            />
+            <div *ngIf="location" class="header-search-input-typeahead">
+              <div *ngIf="typeaheadCities[0].city" href="#" class="header-search-input-typeahead-item">{{ typeaheadCities[0].city }}</div>
+              <div *ngIf="typeaheadCities[1].city" href="#" class="header-search-input-typeahead-item">{{ typeaheadCities[1].city }}</div>
+              <div *ngIf="typeaheadCities[2].city" href="#" class="header-search-input-typeahead-item">{{ typeaheadCities[2].city }}</div>
+              <div *ngIf="typeaheadCities[3].city" href="#" class="header-search-input-typeahead-item">{{ typeaheadCities[3].city }}</div>
+              <div *ngIf="typeaheadCities[4].city" href="#" class="header-search-input-typeahead-item">{{ typeaheadCities[4].city }}</div>
+            </div>
+          </div>
           <button id="searchButton" class="header-search-button" (click)="onSearch(location)">Search</button>
         </div>
       </div>
   </div>
+
   <div class="content-wrapper">
       <div *ngIf="weatherData" class="content">
         <div class="content-details">
