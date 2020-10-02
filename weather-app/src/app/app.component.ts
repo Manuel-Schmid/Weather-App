@@ -44,8 +44,11 @@ export class AppComponent {
       data => this.weatherData = data,
       error => {
         this.isError = true;
-        this.errormsg = `There is no city called "${location}" in our database.`;
-
+        if (location === '') {
+          this.errormsg = `Please enter a valid city name.`;
+        } else {
+          this.errormsg = `There is no city called "${location}" in our database.`;
+        }
       }
       );
   }

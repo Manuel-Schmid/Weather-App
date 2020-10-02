@@ -1,4 +1,4 @@
-  <div class="wheather-app">
+<div class="weather-app">
     <div class="overheader">
       <div class="header">
         <div class="header-search">
@@ -7,22 +7,24 @@
         </div>
       </div>
   </div>
-    <div *ngIf="weatherData" class="content centered">
-      <div class="content-details">
-        <div class="city">{{ weatherData.name }}</div>
-        <img [src]="getIcon()" class="icon" alt="weatherData.weather[0].description">
-        <div class="temp">{{ weatherData.main.temp }} °C</div>
-        <div class="state">{{ weatherData.weather[0].description }}</div>
-        <div class="date">{{ getDate() }}</div>
-        <div *ngIf="weatherData" class="content-map">
-          <iframe [src]="this.sanitizedURL()" class="map"></iframe>
+  <div class="content-wrapper">
+      <div *ngIf="weatherData" class="content">
+        <div class="content-details">
+          <div class="city">{{ weatherData.name }}</div>
+          <img [src]="getIcon()" class="icon" alt="weatherData.weather[0].description">
+          <div class="temp">{{ weatherData.main.temp }} °C</div>
+          <div class="state">{{ weatherData.weather[0].description }}</div>
+          <div class="date">{{ getDate() }}</div>
+          <div *ngIf="weatherData" class="content-map">
+            <iframe [src]="this.sanitizedURL()" class="map"></iframe>
+          </div>
         </div>
       </div>
+      <div *ngIf="isError" class="content-error">
+        <div class="content-error-details">
+          <div class="errormessage">{{ errormsg }}</div>
+        </div>
     </div>
-    <div *ngIf="isError" class="content-error centered">
-      <div class="content-error-details">
-        <div class="errormessage">{{ errormsg }}</div>
-      </div>
   </div>
-  </div>
+</div>
 

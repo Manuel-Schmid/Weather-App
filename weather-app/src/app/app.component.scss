@@ -1,4 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@media only screen and (max-width: 850px) {
+    .content { width: 50%; }
+    .content-error { width: 50%; }
+    .header-search { width: 45%; }
+}
+@media only screen and (max-width: 600px) {
+    .content { width: 70%; }
+    .content-error { width: 70%; }
+    .header-search { width: 70%; }
+}
+@media only screen and (max-width: 400px) {
+    .content { width: 100%; }
+    .content-error { width: 100%; }
+    .header-search { width: 90%; }
+}
 
 * {
     margin: 0px;
@@ -6,29 +21,27 @@
 }
 
 .weather-app {
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 .header {
     background-color: white;
     width: 100%;
-    padding: 5px;
-    padding-left: 0px;
-    padding-right: 0px;
-    margin-bottom: 15%;
+    padding: 5px 0px;
     -webkit-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.12);
     -moz-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.12);
     box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.12);
     
     &-search{
+        display: flex;
         margin: auto;
         margin-top: 0px;
         height: 31px;
         width: 38%;
         display: flex;
-        padding-left: 5px;
-        padding-bottom: 50px;
-        padding-right: 5px;
+        padding: 0px 5px 50px 5px;
         
         &-input {
             margin-top: 25px;
@@ -73,20 +86,8 @@
     border-top-color:rgb(28, 184, 171);
     border-left-color: transparent;
     border-right-color: rgb(28, 184, 171);
+    z-index: 100;
 }
-/* .overheader::after{
-    content:"";
-    position: absolute;
-    margin-top: calc(100% - 400px);
-    margin-left: 0px;
-    width: 0px;
-    height: 0px;
-    border: 200px solid;
-    border-bottom-color: rgb(28, 184, 171);
-    border-top-color: transparent;
-    border-left-color: rgb(28, 184, 171);
-    border-right-color: transparent;
-} */
 
 button:focus{
     outline: none;
@@ -95,23 +96,23 @@ button:focus{
 input:focus{
     outline: none;
 }
-.centeredxxxx{
-    position: fixed;
-    left: 37%;
-    top: 30%;
-}
 
 .content {
 
-    margin: auto;
     width: 25%;
-    position: absolute;
-    margin-left: 37.5%;
     background-color: white;
     padding: 20px;
     -webkit-box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
     -moz-box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
     box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
+
+    &-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        z-index: 101;
+    }
 
     &-details{
         padding-top: 30px;
@@ -133,23 +134,20 @@ input:focus{
 }
 
 .content-error{
-    width: 34%;
+    width: 25%;
     background-color: white;
     padding: 20px;
-    padding-top: 30px;
-    padding-bottom: 30px;
     -webkit-box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
     -moz-box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
-    box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);  
+    box-shadow: 7px 9px 6px 0px rgba(0,0,0,0.16);
     
     &-details{
-        padding: 40px;
-        padding-top: 30px;
-        padding-bottom: 30px;
+        padding-top: 1%;
+        padding-bottom: 1%;
         margin: auto;
-        width: 63%;
-        color: black;
-        background-color: rgb(111, 233, 217);
+        width: 100%;
+        color: white;
+        background-color: rgb(28, 184, 171);
         font-family: 'Poppins', sans-serif;
         text-align: center;
         -webkit-box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.14);
