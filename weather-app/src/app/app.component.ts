@@ -2,10 +2,9 @@ import { getUrlScheme } from '@angular/compiler';
 import { Component, Input } from '@angular/core';
 import { WeatherApiService } from './services/weather-api.service';
 import { WeatherItem } from './models/weather-item';
-import { debounceTime, distinctUntilChanged, map, switchMap, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { GoogleMapsService } from './services/google-maps.service';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { CityApiService } from './services/city-api.service';
 import { City } from './models/city';
 
@@ -17,25 +16,14 @@ import { City } from './models/city';
 
 export class AppComponent {
   title = 'weather-app';
-  public location = '';
+  location = '';
   weatherData: WeatherItem;
   trustedUrl: SafeUrl;
   errormsg = '';
   isError: boolean;
   cities: City[];
-  typeaheadCities: City[];
-
-  /*
-  search = (text$: Observable<string>) => {
-    return text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map(term => term.length < 2
-        ? []
-        : this.cityNames.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-      );
-  }
-  */
+  typeAheadCities: City[];
+  typeAheadIsOn: boolean;
 
   constructor(
     private weatherApiService: WeatherApiService,
@@ -49,7 +37,21 @@ export class AppComponent {
       });
     }
 
-  onSearch(location: string): any {
+  onSearchKeyUp(event: any): void {
+    this.typeAheadIsOn = true;
+    this.location = event.target.value;
+    // search with enter
+    if (event.keyCode === 13){
+      this.onSearch(this.location);
+    }
+    // turn typeAhead off with escape
+    if (event.keyCode === 27){
+      this.typeAheadOff();
+    }
+  }
+
+  onSearch(location: string): void {
+    this.typeAheadIsOn = false;
     this.errormsg = '';
     this.isError = false;
     this.weatherData = null;
@@ -64,48 +66,83 @@ export class AppComponent {
         }
       }
     );
+    (document.getElementById('searchInput') as HTMLInputElement).value = location;
   }
 
-  onSearchKeyUp(event: any): any {
-    this.location = event.target.value;
-    // search with enter
-    if (event.keyCode === 13){
-      this.onSearch(this.location);
-    }
+  typeAheadOff(): void {
+    this.typeAheadIsOn = false;
+  }
+
+  typeAheadOn(): void {
+    this.typeAheadIsOn = true;
   }
 
   onTypeahead(location: string): void {
-      console.log('typeahead', location);
-      this.typeaheadCities = this.cities.filter((city: City) => {
-        if (city.city.toLowerCase().includes(location.toLowerCase()) || city.admin.toLowerCase().includes(location.toLowerCase())) {
+      this.typeAheadCities = this.cities.filter((city: City) => {
+        if (
+          city.city.toLowerCase().includes(location.toLowerCase())
+          ||
+          this.specialLetters(city.city.toLowerCase()).includes(this.specialLetters(location.toLowerCase()))) {
           return true;
         } else {
           return false;
         }
       });
+      this.typeAheadCities.sort(this.compare);
+      this.typeAheadCities = this.typeAheadSorting(this.typeAheadCities, location);
   }
 
-  /*
-  getCityNames(): void {
-    const cities = this.cities;
-    let cityNames = [];
-    for (let i = 0; i < cities.length; i++) {
-      cityNames.push(cities[i].city);
+  compare(a, b): number{
+    const cityA = a.city.toLowerCase();
+    const cityB = b.city.toLowerCase();
+
+    let comparison = 0;
+    if (cityA > cityB) {
+      comparison = 1;
+    } else if (cityA < cityB) {
+      comparison = -1;
     }
-    this.cityNames = cityNames;
-    console.log(this.cityNames);
+    return comparison;
   }
-  */
+
+  typeAheadSorting(typeAheadCities: City[], location: string): City[]{
+    const startingCities = typeAheadCities.filter((city: City) => {
+      return city.city.toLowerCase().startsWith(location.toLowerCase());
+    });
+    const otherCities = typeAheadCities.filter((city: City) => {
+      return city.city.toLowerCase().startsWith(location.toLowerCase()) !== true;
+    });
+    return [...startingCities, ...otherCities];
+  }
+
+  specialLetters(searchTerm: string): string{
+      searchTerm = searchTerm.replace(/ä/g, 'ae');
+      searchTerm = searchTerm.replace(/ü/g, 'ue');
+      searchTerm = searchTerm.replace(/ö/g, 'oe');
+      searchTerm = searchTerm.replace(/é/g, 'e');
+      searchTerm = searchTerm.replace(/è/g, 'e');
+      searchTerm = searchTerm.replace(/ê/g, 'e');
+      searchTerm = searchTerm.replace(/à/g, 'a');
+      searchTerm = searchTerm.replace(/â/g, 'a');
+      searchTerm = searchTerm.replace(/ô/g, 'o');
+      searchTerm = searchTerm.replace(/û/g, 'u');
+      searchTerm = searchTerm.replace(/ç/g, 'c');
+      searchTerm = searchTerm.replace(/î/g, 'i');
+      searchTerm = searchTerm.replace(/ë/g, 'e');
+      searchTerm = searchTerm.replace(/ï/g, 'i');
+      searchTerm = searchTerm.replace(/sankt/g, 'st.');
+      return searchTerm;
+  }
 
   getWeather(location: string): Observable<WeatherItem>{
     return this.weatherApiService.getWeatherData(location);
   }
 
-  getIcon(): any{
+  getIcon(): string{
     return this.weatherApiService.getWeatherIconUrl(this.weatherData.weather[0].icon);
   }
 
-  getMap(): any{
+  getMap(): string{
     return this.googleMapsService.getMapUrl(this.weatherData.coord.lat, this.weatherData.coord.lon);
   }
 
@@ -126,7 +163,7 @@ export class AppComponent {
     return cd;
   }
 
-  sanitizedURL(): any {
+  sanitizedURL(): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.getMap());
   }
 }

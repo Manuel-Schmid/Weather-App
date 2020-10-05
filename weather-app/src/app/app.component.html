@@ -10,12 +10,12 @@
             (keyup)="onSearchKeyUp($event)"
             (input)="onTypeahead($event.target.value)"
             />
-            <div *ngIf="location" class="header-search-input-typeahead">
-              <div *ngIf="typeaheadCities[0].city" href="#" class="header-search-input-typeahead-item">{{ typeaheadCities[0].city }}</div>
-              <div *ngIf="typeaheadCities[1].city" href="#" class="header-search-input-typeahead-item">{{ typeaheadCities[1].city }}</div>
-              <div *ngIf="typeaheadCities[2].city" href="#" class="header-search-input-typeahead-item">{{ typeaheadCities[2].city }}</div>
-              <div *ngIf="typeaheadCities[3].city" href="#" class="header-search-input-typeahead-item">{{ typeaheadCities[3].city }}</div>
-              <div *ngIf="typeaheadCities[4].city" href="#" class="header-search-input-typeahead-item">{{ typeaheadCities[4].city }}</div>
+            <div *ngIf="location && typeAheadIsOn === true" class="header-search-input-typeahead">
+              <div *ngIf="typeAheadCities[0]" href="#" class="header-search-input-typeahead-item" (click)="onSearch(typeAheadCities[0].city)">{{ typeAheadCities[0].city }}</div>
+              <div *ngIf="typeAheadCities[1]" href="#" class="header-search-input-typeahead-item" (click)="onSearch(typeAheadCities[1].city)">{{ typeAheadCities[1].city }}</div>
+              <div *ngIf="typeAheadCities[2]" href="#" class="header-search-input-typeahead-item" (click)="onSearch(typeAheadCities[2].city)">{{ typeAheadCities[2].city }}</div>
+              <div *ngIf="typeAheadCities[3]" href="#" class="header-search-input-typeahead-item" (click)="onSearch(typeAheadCities[3].city)">{{ typeAheadCities[3].city }}</div>
+              <div *ngIf="typeAheadCities[4]" href="#" class="header-search-input-typeahead-item" (click)="onSearch(typeAheadCities[4].city)">{{ typeAheadCities[4].city }}</div>
             </div>
           </div>
           <button id="searchButton" class="header-search-button" (click)="onSearch(location)">Search</button>
@@ -23,7 +23,7 @@
       </div>
   </div>
 
-  <div class="content-wrapper">
+  <div class="content-wrapper" (click)="typeAheadOff()">
       <div *ngIf="weatherData" class="content">
         <div class="content-details">
           <div class="city">{{ weatherData.name }}</div>
